@@ -35,6 +35,13 @@ class TrainOptions(BaseOptions):
         parser.add_argument('--pool_size', type=int, default=50, help='the size of image buffer that stores previously generated images')
         parser.add_argument('--lr_policy', type=str, default='linear', help='learning rate policy. [linear | step | plateau | cosine]')
         parser.add_argument('--lr_decay_iters', type=int, default=50, help='multiply by a gamma every lr_decay_iters iterations')
-
+        
+        # distributed training parameters
+        parser.add_argument('--distributed', action='store_true', help='enable distributed training')
+        parser.add_argument('--local_rank', type=int, default=0, help='local rank for distributed training')
+        parser.add_argument('--world_size', type=int, default=1, help='number of processes in distributed training')
+        parser.add_argument('--dist_backend', type=str, default='nccl', help='distributed backend')
+        parser.add_argument('--dist_url', type=str, default='env://', help='url used to set up distributed training')
+        
         self.isTrain = True
         return parser
